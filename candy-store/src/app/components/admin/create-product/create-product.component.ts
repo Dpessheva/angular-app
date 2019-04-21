@@ -11,7 +11,7 @@ import { ProductsService } from '../../../core/services/products/products.servic
   styleUrls: ['./create-product.component.scss']
 })
 export class CreateProductComponent implements OnInit {
-  protected createForm
+  protected createForm;
 
   constructor(
     private fb: FormBuilder,
@@ -40,30 +40,30 @@ export class CreateProductComponent implements OnInit {
 
     const product: CreateProductModel = Object.assign({}, this.createForm.value)
 
-    this.productsService.createProduct(product)
+    this.productsService.createProduct(product);
   }
 
   get name () {
-    return this.createForm.get('name')
+    return this.createForm.get('name');
   }
 
   get ingredients () {
-    return this.createForm.get('ingredients')
+    return this.createForm.get('ingredients');
   }
 
   get description () {
-    return this.createForm.get('description')
+    return this.createForm.get('description');
   }
 
   get image () {
-    return this.createForm.get('image')
+    return this.createForm.get('image');
   }
 
   get weight () {
-    return this.createForm.get('weight')
+    return this.createForm.get('weight');
   }
 
   get price () {
-    return this.createForm.get('price')
+    return this.createForm.get('price');
   }
 }
