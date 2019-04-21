@@ -23,33 +23,33 @@ export class ApprovedOrdersComponent extends BaseComponent implements OnInit {
   protected getTotalSum = getTotalSum;
   protected toLocaleString = toLocaleString;
   protected approvedOrders: OrderModel[];
-  private subscription$: Subscription
+  private subscription$: Subscription;
   
   constructor(
     private store: Store<AppState>,
     private OrdersService: OrdersService) {
-    super()
+    super();
   }
 
   ngOnInit() {
     this.store.dispatch(new UndoOrdersRequestMade())
-    this.OrdersService.getApprovedOrders()
+    this.OrdersService.getApprovedOrders();
     this.subscription$ = this.store
-    .pipe(select(state=> {
+    .pipe(select(state => {
       if (state.http.ordersRequestMade) {
         this.approvedOrders = state.orders.approvedOrders
-        .sort((a:OrderModel, b:OrderModel) => +new Date(b.date) - +new Date(a.date))
+        .sort((a: OrderModel, b: OrderModel) => +new Date(b.date) - +new Date(a.date))
       };
     })
 
     );
     this.subscriptions.push(this.subscription$)
   }
-  changePage (page){
+  changePage (page) {
     this.currentPage = page;
   }
 
-  trackByIds(index:number, order:OrderModel):string{
+  trackByIds(index: number, order: OrderModel): string{
     return order._id;
   }
 }
