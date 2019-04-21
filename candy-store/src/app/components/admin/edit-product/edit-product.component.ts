@@ -1,14 +1,14 @@
-import { ActivatedRoute } from '@angular/router'
-import { Component, OnInit } from '@angular/core'
-import { FormBuilder, Validators } from '@angular/forms'
-import { Store, select } from '@ngrx/store'
-import { Subscription } from 'rxjs'
+import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { Store, select } from '@ngrx/store';
+import { Subscription } from 'rxjs';
 
-import { AppState } from '../../../core/store/app.state'
-import { BaseComponent } from '../../base.component'
-import CustomValidators from '../../../core/utils/customValidators'
-import { ProductModel } from '../../products/models/ProductModel'
-import { ProductsService } from '../../../core/services/products/products.service'
+import { AppState } from '../../../core/store/app.state';
+import { BaseComponent } from '../../base.component';
+import CustomValidators from '../../../core/utils/customValidators';
+import { ProductModel } from '../../products/models/ProductModel';
+import { ProductsService } from '../../../core/services/products/products.service';
 
 @Component({
   selector: 'app-edit-product',
@@ -69,23 +69,23 @@ export class EditProductComponent extends BaseComponent implements OnInit {
       return;
     }
 
-    const product: ProductModel = Object.assign({}, this.product, this.editForm.value)
+    const product: ProductModel = Object.assign({}, this.product, this.editForm.value);
     this.productsService.editProduct(product);
   }
 
-  get name () {
+  get name() {
     return this.editForm.get('name');
   }
 
-  get description () {
+  get description() {
     return this.editForm.get('description');
   }
 
-  get image () {
+  get image() {
     return this.editForm.get('image');
   }
 
-  get price () {
+  get price() {
     return this.editForm.get('price');
   }
 }
