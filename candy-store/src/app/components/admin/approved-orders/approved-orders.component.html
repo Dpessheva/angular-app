@@ -16,9 +16,7 @@
             <tbody *ngIf="approvedOrders.length > 0; else notFound">
               <tr
                 *ngFor="
-                  let o of (approvedOrders
-                    | paginate
-                      : {
+                  let o of (approvedOrders | paginate: {
                           id: 'approvedOrders',
                           itemsPerPage: pageSize,
                           currentPage: currentPage
