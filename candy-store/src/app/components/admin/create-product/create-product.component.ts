@@ -20,17 +20,10 @@ export class CreateProductComponent implements OnInit {
   ngOnInit() {
     this.createForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3)]],
-      ingredients: ['', [
-        Validators.required,
-        Validators.minLength(3),
-        CustomValidators.noSpaceAfterComma.bind(this),
-        CustomValidators.noCommaAtTheEnd.bind(this)]
-      ],
       description: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(200)]],
       image: ['', [Validators.required, Validators.minLength(14), Validators.pattern('^(http|https):\/\/[a-zA-Z0-9]+.*$')]],
-      weight: ['', [Validators.required, Validators.min(250), Validators.max(800)]],
       price: ['', [Validators.required, Validators.min(0)]]
-    })
+    });
   }
 
   create() {
@@ -43,27 +36,19 @@ export class CreateProductComponent implements OnInit {
     this.productsService.createProduct(product);
   }
 
-  get name () {
+  get name() {
     return this.createForm.get('name');
   }
 
-  get ingredients () {
-    return this.createForm.get('ingredients');
-  }
-
-  get description () {
+  get description() {
     return this.createForm.get('description');
   }
 
-  get image () {
+  get image() {
     return this.createForm.get('image');
   }
 
-  get weight () {
-    return this.createForm.get('weight');
-  }
-
-  get price () {
+  get price() {
     return this.createForm.get('price');
   }
 }
