@@ -14,6 +14,9 @@ import { UserOrdersComponent } from './components/orders/user-orders/user-orders
 import { DetailsPageComponent } from './components/products/details-page/details-page.component';
 import { ProductCartComponent } from './components/products/product-cart/product-cart.component';
 import { ProductDeleteModalComponent } from './components/products/product-delete-modal/product-delete-modal.component';
+import { ProductDetailsComponent } from './components/products/product-details/product-details.component';
+import { ProductListComponent } from './components/products/product-list/product-list.component';
+import { ProductReviewsComponent } from './components/products/product-reviews/product-reviews.component';
 
 
 @NgModule({
@@ -30,6 +33,9 @@ import { ProductDeleteModalComponent } from './components/products/product-delet
     DetailsPageComponent,
     ProductCartComponent,
     ProductDeleteModalComponent,
+    ProductDetailsComponent,
+    ProductListComponent,
+    ProductReviewsComponent,
   
   ],
   imports: [
