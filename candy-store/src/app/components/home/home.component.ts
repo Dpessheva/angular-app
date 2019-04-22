@@ -28,24 +28,24 @@ export class HomeComponent extends BaseComponent implements OnInit {
     private modalService: NgbModal
 
   ) {
-    super()
+    super();
   }
 
   ngOnInit() {
-    this.productsService.getAllProducts()
+    this.productsService.getAllProducts();
     this.subscription$ = this.store
     .pipe(select(state => state.products.all))
-    .subscribe(products=>{
+    .subscribe(products => {
       this.products = products
-      .sort((a,b)=> b.likes.length - a.likes.length)
-      .slice(0,3)
+      .sort((a, b) => b.likes.length - a.likes.length)
+      .slice(0,3);
     });
     this.subscriptions.push(this.subscription$);
   }
 openRegisterModal(){
   const registerRef = this.modalService.open(RegisterModalComponent);
-  registerRef.result.then((result)=>{
+  registerRef.result.then((result) => {
 
-  }).catch((error)=>{})
+  }).catch((error) => {})
 }
 }
