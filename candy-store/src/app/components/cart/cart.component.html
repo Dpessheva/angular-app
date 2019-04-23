@@ -16,7 +16,6 @@
             <div class="col-sm-4 hidden-xs"><img src="{{pr.image}}" alt="..." class="cart-image" /></div>
             <div class="col-sm-8">
               <h4 class="nomargin">{{pr.name}}</h4>
-              <p>{{pr.ingredients.join(', ')}}</p>
             </div>
           </div>
         </td>
@@ -39,7 +38,7 @@
     </tbody>
     <tfoot>
       <tr>
-        <td><a routerLink="/menu" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
+        <td><a routerLink="/store" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
         <td colSpan="2" class="hidden-xs"></td>
         <td class="hidden-xs text-center"><strong>Total {{totalSum.toFixed(2)}}</strong></td>
         <td *ngIf="products.length > 0"><button class="btn btn-success btn-block" (click)="onCheckoutButtonClick()">Checkout <i class="fa fa-angle-right"></i></button></td>

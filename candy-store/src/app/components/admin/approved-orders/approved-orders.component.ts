@@ -6,7 +6,7 @@ import { AppState } from '../../../core/store/app.state';
 import { BaseComponent } from '../../base.component';
 import { getTotalSum, toLocaleString } from '../../../core/utils/helperFunctions';
 import { OrderModel } from '../../orders/models/OrderModel';
-import { OrdersService } from '../../../core/services/orders/orders.service'
+import { OrdersService } from '../../../core/services/orders/orders.service';
 import { UndoOrdersRequestMade } from '../../../core/store/http/http.actions';
 
 
@@ -17,9 +17,11 @@ import { UndoOrdersRequestMade } from '../../../core/store/http/http.actions';
 })
 export class ApprovedOrdersComponent extends BaseComponent implements OnInit {
 
+// tslint:disable-next-line: no-inferrable-types
   protected pageSize: number = 5;
+// tslint:disable-next-line: no-inferrable-types
   protected currentPage: number = 1;
-  protected NotFoundMessage = 'There are no approved orders at the moment'
+  protected NotFoundMessage = 'There are no approved orders at the moment';
   protected getTotalSum = getTotalSum;
   protected toLocaleString = toLocaleString;
   protected approvedOrders: OrderModel[];
@@ -32,20 +34,19 @@ export class ApprovedOrdersComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.store.dispatch(new UndoOrdersRequestMade())
+    this.store.dispatch(new UndoOrdersRequestMade());
     this.OrdersService.getApprovedOrders();
-    this.subscription$ = this.store
-    .pipe(select(state => {
+    this.subscription$ = this.store.pipe(select(state => {
       if (state.http.ordersRequestMade) {
         this.approvedOrders = state.orders.approvedOrders
-        .sort((a: OrderModel, b: OrderModel) => +new Date(b.date) - +new Date(a.date))
-      };
+        .sort((a: OrderModel, b: OrderModel) => +new Date(b.date) - +new Date(a.date));
+      }
     })
 
     );
-    this.subscriptions.push(this.subscription$)
+    this.subscriptions.push(this.subscription$);
   }
-  changePage (page) {
+  changePage(page) {
     this.currentPage = page;
   }
 

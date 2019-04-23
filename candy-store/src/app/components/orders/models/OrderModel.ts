@@ -1,4 +1,4 @@
-import { OrderProductModel } from './OrderProductModel'
+import { OrderProductModel } from './OrderProductModel';
 
 export class OrderModel {
   _id: string;
