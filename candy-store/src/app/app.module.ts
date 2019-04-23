@@ -1,54 +1,77 @@
+import { AppRoutingModule } from './app.routing';
+import { AuthenticationModule } from './components/authentication/authentication.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
+import { GuardsModule } from './core/guards/guards.module';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgModule } from '@angular/core';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { OrdersModule } from './components/orders/orders.module';
+import { ProductsModule } from './components/products/products.module';
+import { RouterModule } from '@angular/router'
+import { ServicesModule } from './core/services/services.module';
+import { SharedModule } from './components/shared/shared.module';
+import { StoreModule, ActionReducer } from '@ngrx/store';
+import { ToastrModule } from 'ngx-toastr';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './components/home/home/home.component';
-import { LoginModalComponent } from './components/authentication/login-modal/login-modal/login-modal.component';
-import { RegisterModalComponent } from './components/authentication/register-modal/register-modal.component';
 import { CartComponent } from './components/cart/cart.component';
+import { HomeComponent } from './components/home/home.component';
 import { ShopComponent } from './components/shop/shop.component';
-import { OrdersComponent } from './components/orders/orders.component';
-import { OrderDetailsComponent } from './components/orders/order-details/order-details.component';
-import { UserOrdersComponent } from './components/orders/user-orders/user-orders.component';
-import { DetailsPageComponent } from './components/products/details-page/details-page.component';
-import { ProductCartComponent } from './components/products/product-cart/product-cart.component';
-import { ProductDeleteModalComponent } from './components/products/product-delete-modal/product-delete-modal.component';
-import { ProductDetailsComponent } from './components/products/product-details/product-details.component';
-import { ProductListComponent } from './components/products/product-list/product-list.component';
-import { ProductReviewsComponent } from './components/products/product-reviews/product-reviews.component';
-import { FooterComponent } from './components/shared/footer/footer.component';
-import { NavigationComponent } from './components/shared/navigation/navigation.component';
-import { NotFoundComponent } from './components/shared/not-found/not-found.component';
 
+import { appReducers } from './core/store/app.reducers';
+import { JWTInterceptor, ErrorInterceptor } from './core/interceptors';
+
+import { AppState } from './core/store/app.state';
+import { storeLogger } from 'ngrx-store-logger';
+
+import { environment } from '../environments/environment';
+
+export function logger(reducer: ActionReducer<AppState>): any {
+  return storeLogger()(reducer);
+}
+
+export const metaReducers = environment.production ? [] : [logger]
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
-    LoginModalComponent,
-    RegisterModalComponent,
     CartComponent,
-    ShopComponent,
-    OrdersComponent,
-    OrderDetailsComponent,
-    UserOrdersComponent,
-    DetailsPageComponent,
-    ProductCartComponent,
-    ProductDeleteModalComponent,
-    ProductDetailsComponent,
-    ProductListComponent,
-    ProductReviewsComponent,
-    FooterComponent,
-    NavigationComponent,
-    NotFoundComponent,
-  
+    HomeComponent,
+    ShopComponent
   ],
   imports: [
+    AppRoutingModule,
+    AuthenticationModule,
+    BrowserAnimationsModule,
     BrowserModule,
-    AppRoutingModule
+    GuardsModule,
+    HttpClientModule,
+    MDBBootstrapModule.forRoot(),
+    NgbModule.forRoot(),
+    NgxSpinnerModule,
+    OrdersModule,
+    ProductsModule,
+    RouterModule,
+    ServicesModule,
+    SharedModule,
+    StoreModule.forRoot(appReducers, {metaReducers}),
+    ToastrModule.forRoot()
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JWTInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
