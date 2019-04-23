@@ -9,19 +9,19 @@ function validateSignupForm (payload) {
   let isFormValid = true
   let message = ''
 
+  if (!payload || typeof payload.username !== 'string' || payload.username.trim().length < 4) {
+    isFormValid = false
+    errors.username = 'Username must be at least 4 characters long'
+  }
+
   if (!payload || typeof payload.email !== 'string' || !validator.isEmail(payload.email)) {
     isFormValid = false
-    errors.email = 'Please provide a correct email address.'
+    errors.email = 'Please provide a correct email address'
   }
 
-  if (!payload || typeof payload.password !== 'string' || payload.password.trim().length < 4) {
+  if (!payload || typeof payload.password !== 'string' || payload.password.trim().length < 8) {
     isFormValid = false
-    errors.password = 'Password must have at least 4 characters.'
-  }
-
-  if (!payload || typeof payload.name !== 'string' || payload.name.trim().length === 0) {
-    isFormValid = false
-    errors.name = 'Please provide your name.'
+    errors.password = 'Password must be at least 8 characters long'
   }
 
   if (!isFormValid) {
@@ -40,7 +40,7 @@ function validateLoginForm (payload) {
   let isFormValid = true
   let message = ''
 
-  if (!payload || typeof payload.email !== 'string' || payload.email.trim().length === 0) {
+  if (!payload || typeof payload.email !== 'string' || payload.email.trim().length === 0 || !validator.isEmail(payload.email)) {
     isFormValid = false
     errors.email = 'Please provide your email address.'
   }
@@ -61,10 +61,10 @@ function validateLoginForm (payload) {
   }
 }
 
-router.post('/register', (req, res, next) => {
+router.post('/signup', (req, res, next) => {
   const validationResult = validateSignupForm(req.body)
   if (!validationResult.success) {
-    return res.status(401).json({
+    return res.status(200).json({
       success: false,
       message: validationResult.message,
       errors: validationResult.errors
@@ -73,7 +73,7 @@ router.post('/register', (req, res, next) => {
 
   return passport.authenticate('local-signup', (err) => {
     if (err) {
-      return res.status(401).json({
+      return res.status(200).json({
         success: false,
         message: err
       })
@@ -89,7 +89,7 @@ router.post('/register', (req, res, next) => {
 router.post('/login', (req, res, next) => {
   const validationResult = validateLoginForm(req.body)
   if (!validationResult.success) {
-    return res.status(401).json({
+    return res.status(200).json({
       success: false,
       message: validationResult.message,
       errors: validationResult.errors
@@ -99,19 +99,18 @@ router.post('/login', (req, res, next) => {
   return passport.authenticate('local-login', (err, token, userData) => {
     if (err) {
       if (err.name === 'IncorrectCredentialsError') {
-        console.log('Invalid credentials');
-        return res.status(401).json({
+        return res.status(200).json({
           success: false,
           message: err.message
         })
       }
 
-      return res.status(401).json({
+      return res.status(200).json({
         success: false,
         message: 'Could not process the form.'
       })
     }
-    
+
     return res.json({
       success: true,
       message: 'You have successfully logged in!',
