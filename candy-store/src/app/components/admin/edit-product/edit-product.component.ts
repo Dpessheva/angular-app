@@ -13,7 +13,7 @@ import { ProductsService } from '../../../core/services/products/products.servic
 @Component({
   selector: 'app-edit-product',
   templateUrl: './edit-product.component.html',
-  styleUrls: ['./edit-product.component.scss']
+  styleUrls: ['./edit-product.component.css']
 })
 export class EditProductComponent extends BaseComponent implements OnInit {
   protected editForm;
@@ -47,12 +47,6 @@ export class EditProductComponent extends BaseComponent implements OnInit {
     if (this.product) {
       this.editForm = this.fb.group({
         name: [this.product.name, [Validators.required, Validators.minLength(3)]],
-        ingredients: [this.product.ingredients.join(','), [
-          Validators.required,
-          Validators.minLength(3),
-          CustomValidators.noSpaceAfterComma.bind(this),
-          CustomValidators.noCommaAtTheEnd.bind(this)]
-        ],
         description: [this.product.description, [Validators.required, Validators.minLength(10), Validators.maxLength(200)]],
         image: [this.product.image, [
           Validators.required,
