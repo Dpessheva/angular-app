@@ -17,6 +17,9 @@ import { ProductDeleteModalComponent } from './components/products/product-delet
 import { ProductDetailsComponent } from './components/products/product-details/product-details.component';
 import { ProductListComponent } from './components/products/product-list/product-list.component';
 import { ProductReviewsComponent } from './components/products/product-reviews/product-reviews.component';
+import { FooterComponent } from './components/shared/footer/footer.component';
+import { NavigationComponent } from './components/shared/navigation/navigation.component';
+import { NotFoundComponent } from './components/shared/not-found/not-found.component';
 
 
 @NgModule({
@@ -36,6 +39,9 @@ import { ProductReviewsComponent } from './components/products/product-reviews/p
     ProductDetailsComponent,
     ProductListComponent,
     ProductReviewsComponent,
+    FooterComponent,
+    NavigationComponent,
+    NotFoundComponent,
   
   ],
   imports: [
