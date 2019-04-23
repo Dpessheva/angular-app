@@ -12,7 +12,7 @@ import { OrdersService } from '../../core/services/orders/orders.service';
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.css'],
+  styleUrls: ['./cart.component.scss'],
   animations: animations
 })
 export class CartComponent extends BaseComponent implements OnInit {

@@ -5,7 +5,7 @@ import { animations } from './product-list.animations';
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
-  styleUrls: ['./product-list.component.css'],
+  styleUrls: ['./product-list.component.scss'],
   animations: animations
 })
 export class ProductListComponent {

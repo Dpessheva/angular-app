@@ -11,7 +11,7 @@ import { OrdersService } from '../../../core/services/orders/orders.service';
 @Component({
   selector: 'app-user-orders',
   templateUrl: './user-orders.component.html',
-  styleUrls: ['./user-orders.component.css']
+  styleUrls: ['./user-orders.component.scss']
 })
 export class UserOrdersComponent extends BaseComponent implements OnInit {
   protected pageSize: number = 5;

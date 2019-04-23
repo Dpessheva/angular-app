@@ -10,7 +10,7 @@ import { toLocaleString } from '../../../core/utils/helperFunctions';
 @Component({
   selector: 'app-product-reviews',
   templateUrl: './product-reviews.component.html',
-  styleUrls: ['./product-reviews.component.css']
+  styleUrls: ['./product-reviews.component.scss']
 })
 export class ProductReviewsComponent {
   protected reviewForm;

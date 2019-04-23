@@ -13,7 +13,7 @@ import { UndoOrdersRequestMade } from '../../../core/store/http/http.actions';
 @Component({
   selector: 'app-approved-orders',
   templateUrl: './approved-orders.component.html',
-  styleUrls: ['./approved-orders.component.css']
+  styleUrls: ['./approved-orders.component.scss']
 })
 export class ApprovedOrdersComponent extends BaseComponent implements OnInit {
 

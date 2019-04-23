@@ -13,7 +13,7 @@ import { ProductsService } from '../../../core/services/products/products.servic
 @Component({
   selector: 'app-edit-product',
   templateUrl: './edit-product.component.html',
-  styleUrls: ['./edit-product.component.css']
+  styleUrls: ['./edit-product.component.scss']
 })
 export class EditProductComponent extends BaseComponent implements OnInit {
   protected editForm;

@@ -7,7 +7,7 @@ import { ProductsService } from '../../../core/services/products/products.servic
 @Component({
   selector: 'app-product-delete-modal',
   templateUrl: './product-delete-modal.component.html',
-  styleUrls: ['./product-delete-modal.component.css']
+  styleUrls: ['./product-delete-modal.component.scss']
 })
 export class ProductDeleteModalComponent {
   protected faWindowClose = faWindowClose;
