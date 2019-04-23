@@ -9,8 +9,8 @@ import { ProductsService } from '../../core/services/products/products.service';
 
 @Component({
   selector: 'app-store',
-  templateUrl: './store.component.html',
-  styleUrls: ['./store.component.scss']
+  templateUrl: './shop.component.html',
+  styleUrls: ['./shop.component.scss']
 })
 export class ShopComponent extends BaseComponent implements OnInit {
   protected productsToView: ProductModel[];

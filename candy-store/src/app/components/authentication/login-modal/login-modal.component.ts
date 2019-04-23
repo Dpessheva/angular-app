@@ -12,8 +12,8 @@ import { LoginModel } from '../models/LoginModel';
 @Component({
   selector: 'app-login-modal',
   templateUrl: './login-modal.component.html',
-  styleUrls: ['./login-modal.component.css']
 })
+
 export class LoginModalComponent extends BaseComponent {
   protected loginForm;
   protected faWindowClose = faWindowClose;
