@@ -27,7 +27,7 @@ export class PendingOrdersComponent extends BaseComponent implements OnInit, OnD
   constructor(
     private store: Store<AppState>,
     private ordersService: OrdersService ) {
-    super()
+    super();
   }
 
   ngOnInit() {
