@@ -13,10 +13,13 @@ import { UndoOrdersRequestMade } from '../../../core/store/http/http.actions';
 @Component({
   selector: 'app-pending-orders',
   templateUrl: './pending-orders.component.html',
-  animations: animations;
+// tslint:disable-next-line: object-literal-shorthand
+  animations: animations
 })
 export class PendingOrdersComponent extends BaseComponent implements OnInit, OnDestroy {
+// tslint:disable-next-line: no-inferrable-types
   protected pageSize: number = 5;
+// tslint:disable-next-line: no-inferrable-types
   protected currentPage: number = 1;
   protected notFoundMessage = 'There are no pending orders at the moment.';
   protected getTotalSum = getTotalSum;
