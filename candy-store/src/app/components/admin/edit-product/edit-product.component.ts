@@ -8,7 +8,7 @@ import { AppState } from '../../../core/store/app.state';
 import { BaseComponent } from '../../base.component';
 import CustomValidators from '../../../core/utils/customValidators';
 import { ProductModel } from '../../products/models/ProductModel';
-import { ProductsService } from '../../../core/services/products/products.service';
+import { ProductsService } from '../../../core/services/products/products.service'
 
 @Component({
   selector: 'app-edit-product',
