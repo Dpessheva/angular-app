@@ -13,7 +13,7 @@ import { OrdersService } from '../../core/services/orders/orders.service';
   selector: 'app-cart',
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css'],
-  animations: animations;
+  animations: animations
 })
 export class CartComponent extends BaseComponent implements OnInit {
   protected products: ProductInCartModel[]
