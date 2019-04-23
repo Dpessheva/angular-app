@@ -12,7 +12,7 @@ import { ProductsService } from '../../core/services/products/products.service';
   templateUrl: './store.component.html',
   styleUrls: ['./store.component.css']
 })
-export class StoreComponent extends BaseComponent implements OnInit {
+export class ShopComponent extends BaseComponent implements OnInit {
   protected productsToView: ProductModel[];
   private products: ProductModel[];
   private subscription$: Subscription;
@@ -30,7 +30,7 @@ export class StoreComponent extends BaseComponent implements OnInit {
       .pipe(select(state => state.products.all))
       .subscribe(products => {
         this.products = products;
-        this.productsToView = this.products.filter(p => p.name.toLowerCase().includes(this.seacrhTerm.toLowerCase()))
+        this.productsToView = this.products.filter(p => p.name.toLowerCase().includes(this.seacrhTerm.toLowerCase()));
       });
 
     this.subscriptions.push(this.subscription$);
@@ -38,6 +38,6 @@ export class StoreComponent extends BaseComponent implements OnInit {
 
   searchChange(event) {
     this.seacrhTerm = event.target.value;
-    this.productsToView = this.products.filter(p => p.name.toLowerCase().includes(this.seacrhTerm.toLowerCase()))
+    this.productsToView = this.products.filter(p => p.name.toLowerCase().includes(this.seacrhTerm.toLowerCase()));
   }
 }

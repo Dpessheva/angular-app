@@ -7,7 +7,7 @@ import { HomeComponent } from './components/home/home/home.component';
 import { LoginModalComponent } from './components/authentication/login-modal/login-modal/login-modal.component';
 import { RegisterModalComponent } from './components/authentication/register-modal/register-modal.component';
 import { CartComponent } from './components/cart/cart.component';
-import { StoreComponent } from './components/store/store.component';
+import { ShopComponent } from './components/shop/shop.component';
 import { OrdersComponent } from './components/orders/orders.component';
 import { OrderDetailsComponent } from './components/orders/order-details/order-details.component';
 import { UserOrdersComponent } from './components/orders/user-orders/user-orders.component';
@@ -29,7 +29,7 @@ import { NotFoundComponent } from './components/shared/not-found/not-found.compo
     LoginModalComponent,
     RegisterModalComponent,
     CartComponent,
-    StoreComponent,
+    ShopComponent,
     OrdersComponent,
     OrderDetailsComponent,
     UserOrdersComponent,
