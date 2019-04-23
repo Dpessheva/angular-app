@@ -132,5 +132,10 @@
       }
     }
   },
-  "defaultProject": "candy-store"
+  "defaultProject": "candy-store",
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "scss"
+    }
+  }
 }
