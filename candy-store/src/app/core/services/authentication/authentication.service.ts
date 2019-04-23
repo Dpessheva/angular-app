@@ -36,7 +36,7 @@ export class AuthenticationService {
       try {
         const decoded = jwt_decode(authtoken);
         if (!this.isTokenExpired(decoded)) {
-          const authData = new AuthenticationDataModel(authtoken, decoded.username, decoded.isAdmin, true)
+          const authData = new AuthenticationDataModel(authtoken, decoded.username, decoded.isAdmin, true);
           this.store.dispatch(new Authenticate(authData));
         }
       } catch (err) {

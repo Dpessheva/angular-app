@@ -14,7 +14,7 @@ const productSchema = new Schema({
     type: String,
     required: REQUIRED_VALIDATION_MESSAGE
   },
-  imageUrls: {
+  image: {
     type: String,
     required: REQUIRED_VALIDATION_MESSAGE
   },

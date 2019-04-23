@@ -20,7 +20,7 @@ import { GetAllProducts,
 import { GetRequestBegin, GetRequestEnd } from '../../store/http/http.actions';
 import { ResponseDataModel } from '../../models/ResponseDataModel';
 
-const baseUrl = 'http://localhost:5000/products/';
+const baseUrl = 'http://localhost:5000/product/';
 const addReviewUrl = 'http://localhost:5000/reviews/create/';
 const allProductsUrl = baseUrl + 'all';
 const createProductUrl = baseUrl + 'create';

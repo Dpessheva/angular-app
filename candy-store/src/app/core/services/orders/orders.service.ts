@@ -27,7 +27,7 @@ const approveOrderUrl = 'approve/';
 export class OrdersService {
   private ordersRequestMade: boolean;
 
-  constructor (
+  constructor(
     private http: HttpClient,
     private store: Store<AppState>,
     private spinner: NgxSpinnerService,

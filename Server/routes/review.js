@@ -1,12 +1,12 @@
 const express = require('express')
 const authCheck = require('../config/auth-check')
-const Pizza = require('../models/Pizza')
+const Product = require('../models/Product')
 const Review = require('../models/Review')
 
 const router = new express.Router()
 
-router.post('/create/:pizzaId', authCheck, (req, res) => {
-  const pizzaId = req.params.pizzaId
+router.post('/create/:productId', authCheck, (req, res) => {
+  const productId = req.params.productId
   const review = req.body.review
   const username = req.user.username
 
@@ -18,10 +18,10 @@ router.post('/create/:pizzaId', authCheck, (req, res) => {
     })
   }
 
-  Pizza
-    .findById(pizzaId)
-    .then(pizza => {
-      if (!pizza) {
+  Product
+    .findById(productId)
+    .then(product => {
+      if (!product) {
         return res.status(400).json({
           success: false,
           message: 'Product not found.'
@@ -36,12 +36,12 @@ router.post('/create/:pizzaId', authCheck, (req, res) => {
       Review
         .create(reviewObj)
         .then(review => {
-          let reviews = pizza.reviews
+          let reviews = product.reviews
           reviews.push(review._id)
-          pizza.reviews = reviews
-          pizza
+          product.reviews = reviews
+          product
             .save()
-            .then((pizza) => {
+            .then((product) => {
               res.status(200).json({
                 success: true,
                 message: 'Review added successfully.',
