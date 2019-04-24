@@ -34,6 +34,7 @@ export class ShopComponent extends BaseComponent implements OnInit {
       });
 
     this.subscriptions.push(this.subscription$);
+
   }
 
   searchChange(event) {

@@ -30,6 +30,7 @@ export class AuthenticationService {
       .subscribe(data => this.isUserAuthenticated = data);
     this.store.pipe(select(state => state.authentication.username))
       .subscribe(data => this.username = data);
+  
 
     if (localStorage.getItem('authtoken')) {
       const authtoken = localStorage.getItem('authtoken');
