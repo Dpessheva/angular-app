@@ -85,6 +85,6 @@ User Logout:
 - Approve order
 
 ## Approved orders
--Admin route only
+- Admin route only
 - View all approved orders
 - Navidate to order details
