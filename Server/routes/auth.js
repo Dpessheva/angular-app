@@ -99,19 +99,19 @@ router.post('/login', (req, res, next) => {
   return passport.authenticate('local-login', (err, token, userData) => {
     if (err) {
       if (err.name === 'IncorrectCredentialsError') {
-        return res.status(200).json({
+        return res.status(401).json({
           success: false,
           message: err.message
         })
       }
 
-      return res.status(200).json({
+      return res.status(401).json({
         success: false,
         message: 'Could not process the form.'
       })
     }
 
-    return res.json({
+    return res.status(200).json({
       success: true,
       message: 'You have successfully logged in!',
       token,

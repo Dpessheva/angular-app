@@ -1,6 +1,7 @@
 const express = require('express')
 const authCheck = require('../config/auth-check')
 const Product = require('../models/Product')
+const Review = require('../models/Review')
 
 const router = new express.Router()
 
@@ -40,14 +41,22 @@ function validateProductCreateForm (payload) {
     errors
   }
 }
+router.get('/all', (req, res) => {
+  Product
+    .find()
+    .populate('reviews')
+    .then(products => {
+      res.status(200).json(products)
+    })
+})
+
 
 router.post('/create', authCheck, (req, res) => {
   const productObj = req.body;
-  console.log(req.body);
-  if (req.user.roles.indexOf('Admin') > -1) {
+    if (req.user.roles.indexOf('Admin') > -1) {
     const validationResult = validateProductCreateForm(productObj);
     if (!validationResult.success) {
-      return res.status(200).json({
+      return res.status(400).json({
         success: false,
         message: validationResult.message,
         errors: validationResult.errors,
@@ -69,13 +78,13 @@ router.post('/create', authCheck, (req, res) => {
         if (err.code === 11000) {
           message = 'Product with the given name already exists.'
         }
-        return res.status(200).json({
+        return res.status(400).json({
           success: false,
           message: message
         })
       })
   } else {
-    return res.status(200).json({
+    return res.status(401).json({
       success: false,
       message: 'Invalid credentials!'
     })
@@ -88,7 +97,7 @@ router.post('/edit/:id', authCheck, (req, res) => {
     const productObj = req.body
     const validationResult = validateProductCreateForm(productObj)
     if (!validationResult.success) {
-      return res.status(200).json({
+      return res.status(400).json({
         success: false,
         message: validationResult.message,
         errors: validationResult.errors
@@ -101,7 +110,7 @@ router.post('/edit/:id', authCheck, (req, res) => {
         existingProduct.name = productObj.name
         existingProduct.description = productObj.description
         existingProduct.price = productObj.price
-        existingProduct.imageUrls = productObj.imageUrls
+        existingProduct.image = productObj.image
 
         existingProduct
           .save()
@@ -118,7 +127,7 @@ router.post('/edit/:id', authCheck, (req, res) => {
             if (err.code === 11000) {
               message = 'Prodcut with the given name already exists.'
             }
-            return res.status(200).json({
+            return res.status(400).json({
               success: false,
               message: message
             })
@@ -127,26 +136,20 @@ router.post('/edit/:id', authCheck, (req, res) => {
       .catch((err) => {
         console.log(err)
         const message = 'Something went wrong :( Check the form for errors.'
-        return res.status(200).json({
+        return res.status(400).json({
           success: false,
           message: message
         })
       })
   } else {
-    return res.status(200).json({
+    return res.status(401).json({
       success: false,
       message: 'Invalid credentials!'
     })
   }
 })
 
-router.get('/all', (req, res) => {
-  Product
-    .find()
-    .then(products => {
-      res.status(200).json(products)
-    })
-})
+
 
 router.post('/review/:id', authCheck, (req, res) => {
   const id = req.params.id
@@ -215,7 +218,7 @@ router.post('/like/:id', authCheck, (req, res) => {
     .then(product => {
       if (!product) {
         const message = 'Product not found.'
-        return res.status(200).json({
+        return res.status(400).json({
           success: false,
           message: message
         })
@@ -238,7 +241,7 @@ router.post('/like/:id', authCheck, (req, res) => {
         .catch((err) => {
           console.log(err)
           const message = 'Something went wrong :('
-          return res.status(200).json({
+          return res.status(400).json({
             success: false,
             message: message
           })
@@ -247,7 +250,7 @@ router.post('/like/:id', authCheck, (req, res) => {
     .catch((err) => {
       console.log(err)
       const message = 'Something went wrong :('
-      return res.status(200).json({
+      return res.status(400).json({
         success: false,
         message: message
       })
@@ -262,7 +265,7 @@ router.post('/unlike/:id', authCheck, (req, res) => {
     .then(product => {
       if (!product) {
         let message = 'Product not found.'
-        return res.status(200).json({
+        return res.status(400).json({
           success: false,
           message: message
         })
@@ -309,23 +312,31 @@ router.delete('/delete/:id', authCheck, (req, res) => {
     Product
       .findById(id)
       .then((product) => {
-        product
-          .remove()
+        Review
+          .deleteMany({
+            _id: {
+              '$in': product.reviews
+            }
+          })
           .then(() => {
-            return res.status(200).json({
-              success: true,
-              message: 'Product deleted successfully!'
-            })
+            product
+              .remove()
+              .then(() => {
+                return res.status(200).json({
+                  success: true,
+                  message: 'Product deleted successfully!'
+                })
+              })
           })
       })
       .catch(() => {
-        return res.status(200).json({
+        return res.status(400).json({
           success: false,
           message: 'Entry does not exist!'
         })
       })
   } else {
-    return res.status(200).json({
+    return res.status(401).json({
       success: false,
       message: 'Invalid credentials!'
     })

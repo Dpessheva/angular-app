@@ -8,6 +8,7 @@ router.post('/submit', authCheck, (req, res) => {
   const products = req.body
   let orderObj = {
     creator: req.user._id,
+    creatorEmail: req.user.email,
     products
   }
 
@@ -23,7 +24,7 @@ router.post('/submit', authCheck, (req, res) => {
     .catch((err) => {
       console.log(err)
       const message = 'Something went wrong :('
-      return res.status(200).json({
+      return res.status(400).json({
         success: false,
         message: message
       })
@@ -46,7 +47,21 @@ router.get('/pending', authCheck, (req, res) => {
         res.status(200).json(orders)
       })
   } else {
-    return res.status(200).json({
+    return res.status(401).json({
+      success: false,
+      message: 'Invalid credentials!'
+    })
+  }
+})
+router.get('/approved', authCheck, (req, res) => {
+  if (req.user.roles.indexOf('Admin') > -1) {
+    Order
+      .find({status: 'Approved'})
+      .then(orders => {
+        res.status(200).json(orders)
+      })
+  } else {
+    return res.status(401).json({
       success: false,
       message: 'Invalid credentials!'
     })
@@ -60,7 +75,7 @@ router.post('/approve/:id', authCheck, (req, res) => {
     .then(order => {
       if (!order) {
         const message = 'Order not found.'
-        return res.status(200).json({
+        return res.status(400).json({
           success: false,
           message: message
         })
@@ -78,7 +93,7 @@ router.post('/approve/:id', authCheck, (req, res) => {
         .catch((err) => {
           console.log(err)
           const message = 'Something went wrong :('
-          return res.status(200).json({
+          return res.status(400).json({
             success: false,
             message: message
           })
@@ -87,7 +102,7 @@ router.post('/approve/:id', authCheck, (req, res) => {
     .catch((err) => {
       console.log(err)
       const message = 'Something went wrong :('
-      return res.status(200).json({
+      return res.status(400).json({
         success: false,
         message: message
       })

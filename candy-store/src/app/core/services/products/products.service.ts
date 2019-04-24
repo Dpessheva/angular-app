@@ -66,7 +66,7 @@ export class ProductsService {
       .subscribe((res: ResponseDataModel) => {
         this.store.dispatch(new CreateProduct(res.data));
         this.spinner.hide();
-        this.router.navigate(['/menu']);
+        this.router.navigate(['/shop']);
         this.toastr.success('Product added successfully.');
       });
   }
@@ -78,7 +78,7 @@ export class ProductsService {
       .subscribe((res: ResponseDataModel) => {
         this.store.dispatch(new EditProduct(res.data));
         this.spinner.hide();
-        this.router.navigate(['/menu']);
+        this.router.navigate(['/shop']);
         this.toastr.success('Product edited successfully.');
       });
   }
