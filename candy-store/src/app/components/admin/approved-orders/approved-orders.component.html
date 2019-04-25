@@ -27,7 +27,7 @@
               >
                 <td>{{ i + 1 + (currentPage - 1) * 5 }}</td>
                 <td>{{ toLocaleString(o.date) }}</td>
-                <td>$ {{ getTotalSum(o.products).toFixed(2) }}</td>
+                <td>euro {{ getTotalSum(o.products).toFixed(2) }}</td>
                 <td>
                   <a
                     routerLink="/orders/details/{{ o._id }}"
