@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core'
 import { Subscription } from 'rxjs';
-import { Store, select } from '@ngrx/store';
+import { Store, select } from '@ngrx/store'
 
-import { AppState } from '../../core/store/app.state';
-import { BaseComponent } from '../base.component';
-import { ProductModel } from '../products/models/ProductModel';
-import { ProductsService } from '../../core/services/products/products.service';
+import { AppState } from '../../core/store/app.state'
+import { BaseComponent } from '../base.component'
+import { ProductModel } from '../products/models/ProductModel'
+import { ProductsService } from '../../core/services/products/products.service'
 
 @Component({
   selector: 'app-store',
@@ -13,10 +13,10 @@ import { ProductsService } from '../../core/services/products/products.service';
   styleUrls: ['./shop.component.scss']
 })
 export class ShopComponent extends BaseComponent implements OnInit {
-  protected productsToView: ProductModel[];
-  private products: ProductModel[];
-  private subscription$: Subscription;
-  private seacrhTerm: string = '';
+  protected productsToView: ProductModel[]
+  private products: ProductModel[]
+  private subscription$: Subscription
+  private seacrhTerm: string = ''
 
   constructor(
     private productsService: ProductsService,
